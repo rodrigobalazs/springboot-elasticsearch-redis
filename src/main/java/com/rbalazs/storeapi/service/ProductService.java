@@ -31,6 +31,9 @@ public class ProductService {
         this.productRedisRepository = productRedisRepository;
     }
 
+    /**
+     * Retrieves all Products, this method is non-cached, therefore results are fetched directly from Elasticsearch.
+     */
     public List<Product> getProducts() {
         // TODO(rodrigo.balazs) ATM it´s returning a max of 10 Products
         Pageable pageable = PageRequest.of(0, 10);
@@ -39,8 +42,8 @@ public class ProductService {
     }
 
     /**
-     * Retrieves a {@link Product} by its ID. The first retrieval will fetch the Product from Elasticsearch,
-     * and subsequent retrievals will return cached results from Redis.
+     * Retrieves a {@link Product} by its ID, first result will be fetched from Elasticsearch,
+     * subsequent cached ones from Redis Cache.
      */
     @Cacheable(value = "products", key = "#id")
     public Product getProductById(String id) {
@@ -49,8 +52,8 @@ public class ProductService {
     }
 
     /**
-     * Retrieves a {@link Product} by its name. The first retrieval will fetch the Product from Elasticsearch,
-     * and subsequent retrievals will return cached results from Redis.
+     * Retrieves a {@link Product} by its Name, first result will be fetched from Elasticsearch,
+     * subsequent cached ones from Redis Cache.
      */
     @Cacheable(value = "products", key = "#name")
     public Product getProductByName(String name) {

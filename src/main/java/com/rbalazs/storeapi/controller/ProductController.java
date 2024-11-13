@@ -1,5 +1,6 @@
 package com.rbalazs.storeapi.controller;
 
+import com.rbalazs.storeapi.controller.swagger.ProductControllerSwagger;
 import com.rbalazs.storeapi.model.Product;
 import com.rbalazs.storeapi.service.ProductService;
 import org.slf4j.Logger;
@@ -12,10 +13,11 @@ import java.util.List;
 
 /**
  * Product REST Controller.
+ * API Documentation/Swagger at => http://<project_url>/swagger-ui/index.html
  */
 @RestController
 @RequestMapping("/product")
-public class ProductController  {
+public class ProductController implements ProductControllerSwagger {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     private final ProductService productService;
@@ -41,7 +43,7 @@ public class ProductController  {
 
     @GetMapping("/name/{name}")
     public ResponseEntity<Product> getProductByName(@PathVariable String name) {
-        LOGGER.info("starts to execute productController.getProductById() with name:{}" , name);
+        LOGGER.info("starts to execute productController.getProductByName() with name:{}" , name);
         Product product = productService.getProductByName(name);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
