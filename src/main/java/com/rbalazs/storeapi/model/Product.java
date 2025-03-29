@@ -38,11 +38,6 @@ public class Product implements Serializable {
 
     /**
      * Creates a new Product.
-     *
-     * @param theId the product identifier, defined as String type for better Elasticsearch / Redis compatibility.
-     * @param theName the product name
-     * @param thePrice the product price
-     * @param theDescription the product description
      */
     public Product(final String theId, final String theName, final Double thePrice, final String theDescription) {
         Validate.notEmpty(theId, "The product identifier cannot be null nor empty");
